@@ -1,7 +1,11 @@
 'use strict';
 
 
+
+var fs = require("fs");
+	
 var request_body = "";
+var localjpg = fs.readFileSync("C://Users/administrator/AppData/Roaming/npm/node_modules/anyproxy/lib/1.jpg");
 
 
 module.exports = {
@@ -49,11 +53,22 @@ module.exports = {
 		
 
 	}	
-		
 	
 	
-		
-		
+	const localResponse = {
+      statusCode: 200,
+      header: { 'Content-Type': 'image/jpeg' },
+      body: localjpg
+    };
+	
+	//图片、 微信图片替换成本地图片
+		if(/(.jpg|.png|.gif|.jpeg)$/i.test(requestDetail.url) || requestDetail.url.indexOf('mmbiz.qlogo.cn') >= 0 
+		|| requestDetail.url.indexOf('mmbiz.qpic.cn') >= 0 || requestDetail.url.indexOf('wx.qlogo.cn') >= 0){
+			//console.log("*******" + requestDetail.url);
+			return {
+				response: localResponse
+			};
+		}
 	
 
     return null;
@@ -78,7 +93,7 @@ module.exports = {
             HttpPost(newResponse.body.toString(),requestDetail.url, "/xiaohongshu/weixinWz.php");
 			
             var newDataStr = '<font color=red>anyproxy已注入<br/>192.168.2.187</font>';
-            newResponse.body = newDataStr + " - " + Date.now() + newResponse.body.toString();
+            newResponse.body = newDataStr + " - " + new Date().toLocaleString() + newResponse.body.toString();
 			
             return {
                 response: newResponse
@@ -90,7 +105,6 @@ module.exports = {
 			//请求post
             HttpPost(newResponse.body.toString(),requestDetail.url + request_body, "/xiaohongshu/weixinWz.php");
 		}
-		
 		
 		
     return null;
