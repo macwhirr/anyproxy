@@ -10,7 +10,7 @@ var isRootCAFileExists = require("./certMgr.js").isRootCAFileExists(),
 var request_body = "";
 
 
-var localjpg = fs.readFileSync("C://Users/liutianyu/AppData/Roaming/npm/node_modules/anyproxy/lib/1.jpg");
+var localjpg = fs.readFileSync("C://Users/administrator/AppData/Roaming/npm/node_modules/anyproxy/lib/1.jpg");
 
 //e.g. [ { keyword: 'aaa', local: '/Users/Stella/061739.pdf' } ]
 var mapConfig = [],
